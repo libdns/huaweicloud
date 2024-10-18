@@ -12,9 +12,12 @@ import (
 
 // Provider facilitates DNS record manipulation with Huawei Cloud
 type Provider struct {
-	AccessKeyId     string `json:"access_key_id,omitempty"`
+	// AccessKeyId is required by the Huawei Cloud API for authentication.
+	AccessKeyId string `json:"access_key_id,omitempty"`
+	// SecretAccessKey is required by the Huawei Cloud API for authentication.
 	SecretAccessKey string `json:"secret_access_key,omitempty"`
-	RegionId        string `json:"region_id,omitempty"`
+	// RegionId is optional and defaults to "cn-south-1".
+	RegionId string `json:"region_id,omitempty"`
 }
 
 // GetRecords lists all the records in the zone.
