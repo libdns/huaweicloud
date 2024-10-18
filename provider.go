@@ -2,7 +2,6 @@ package huaweicloud
 
 import (
 	"context"
-	"fmt"
 	"slices"
 	"time"
 
@@ -23,8 +22,6 @@ type Provider struct {
 // GetRecords lists all the records in the zone.
 func (p *Provider) GetRecords(ctx context.Context, zone string) ([]libdns.Record, error) {
 	zoneId, err := p.getZoneIdByName(zone)
-	fmt.Println(zoneId)
-	fmt.Println(err)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +66,7 @@ func (p *Provider) AppendRecords(ctx context.Context, zone string, records []lib
 		return nil, err
 	}
 
-	for record := range slices.Values(records) {
+	for i, record := range records {
 		ttl := int32(record.TTL.Seconds())
 		request := &model.CreateRecordSetRequest{
 			ZoneId: zoneId,
@@ -80,9 +77,11 @@ func (p *Provider) AppendRecords(ctx context.Context, zone string, records []lib
 				Records: []string{record.Value},
 			},
 		}
-		if _, err = client.CreateRecordSet(request); err != nil {
+		response, err := client.CreateRecordSet(request)
+		if err != nil {
 			return nil, err
 		}
+		records[i].ID = *response.Id
 	}
 
 	return records, nil
@@ -100,11 +99,21 @@ func (p *Provider) SetRecords(ctx context.Context, zone string, records []libdns
 		return nil, err
 	}
 
-	for record := range slices.Values(records) {
+	for i, record := range records {
+		// If the record id is empty try to get it by name and type
 		if record.ID == "" {
-			if _, err = p.AppendRecords(ctx, zone, []libdns.Record{record}); err != nil {
+			id, err := p.getRecordIdByNameAndType(ctx, zone, record.Name, record.Type)
+			if err == nil {
+				record.ID = id
+			}
+		}
+		// If the record id is still empty, it means it is a new record
+		if record.ID == "" {
+			newRecord, err := p.AppendRecords(ctx, zone, []libdns.Record{record})
+			if err != nil {
 				return nil, err
 			}
+			records[i].ID = newRecord[0].ID
 		} else {
 			name := libdns.AbsoluteName(record.Name, zone)
 			ttl := int32(record.TTL.Seconds())
@@ -119,9 +128,11 @@ func (p *Provider) SetRecords(ctx context.Context, zone string, records []libdns
 					Records: &value,
 				},
 			}
-			if _, err = client.UpdateRecordSet(request); err != nil {
+			response, err := client.UpdateRecordSet(request)
+			if err != nil {
 				return nil, err
 			}
+			records[i].ID = *response.Id
 		}
 	}
 
