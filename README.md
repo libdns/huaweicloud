@@ -1,26 +1,41 @@
-**DEVELOPER INSTRUCTIONS:**
-
-This repo is a template for developers to use when creating new [libdns](https://github.com/libdns/libdns) provider implementations.
-
-Be sure to update:
-
-- The package name
-- The Go module name in go.mod
-- The latest `libdns/libdns` version in go.mod
-- All comments and documentation, including README below and godocs
-- License (must be compatible with Apache/MIT)
-- All "TODO:"s is in the code
-- All methods that currently do nothing
-
-Remove this section from the readme before publishing.
-
----
-
-\<PROVIDER NAME\> for [`libdns`](https://github.com/libdns/libdns)
+Huawei Cloud for [`libdns`](https://github.com/libdns/libdns)
 =======================
 
-[![Go Reference](https://pkg.go.dev/badge/test.svg)](https://pkg.go.dev/github.com/libdns/TODO:PROVIDER_NAME)
+[![Go Reference](https://pkg.go.dev/badge/test.svg)](https://pkg.go.dev/github.com/libdns/huaweicloud)
 
-This package implements the [libdns interfaces](https://github.com/libdns/libdns) for \<PROVIDER\>, allowing you to manage DNS records.
+This package implements the [libdns interfaces](https://github.com/libdns/libdns) for [Huawei Cloud DNS](https://www.huaweicloud.com/product/dns.html), allowing you to manage DNS records.
 
-TODO: Show how to configure and use. Explain any caveats.
+## Authenticating
+
+To authenticate you need to supply our AccessKeyId and AccessKeySecret to the Provider.
+
+## Example
+
+Here's a minimal example of how to get all your DNS records using this `libdns` provider
+
+```go
+package main
+
+import (
+        "context"
+        "fmt"
+        "github.com/libdns/huaweicloud"
+)
+
+func main() {
+        provider := huaweicloud.Provider{
+               AccessKeyId: "<AccessKeyId form your huaweicloud console>",
+               SecretAccessKey: "<SecretAccessKey form your huaweicloud console>",
+        }
+
+        records, err  := provider.GetRecords(context.TODO(), "example.com.")
+        if err != nil {
+                fmt.Println(err.Error())
+        }
+
+        for _, record := range records {
+                fmt.Printf("%s %v %s %s\n", record.Name, record.TTL.Seconds(), record.Type, record.Value)
+        }
+}
+```
+For complete demo check [_example/example.go](_example/example.go)
