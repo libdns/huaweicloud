@@ -12,4 +12,4 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace github.com/huaweicloud/huaweicloud-sdk-go-v3 => github.com/devhaozi/huaweicloud-sdk-go-v3 v0.1.85-0.20241018201231-a42a624bc53e
+replace github.com/huaweicloud/huaweicloud-sdk-go-v3 => github.com/devhaozi/huaweicloud-sdk-go-v3 v0.0.0-20241018202731-25cc3cd669c7
