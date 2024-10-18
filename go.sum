@@ -1,8 +1,8 @@
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/devhaozi/huaweicloud-sdk-go-v3 v0.0.0-20241018202731-25cc3cd669c7 h1:VCjp5ouMQVKon4/jmRzXnsTyRks7np26ZYdDFPkEem8=
-github.com/devhaozi/huaweicloud-sdk-go-v3 v0.0.0-20241018202731-25cc3cd669c7/go.mod h1:4eYk768/riX1BUYvCW7+3ke8GruCbFpWO3FoRAoMNUs=
+github.com/devhaozi/huaweicloud-sdk-go-v3 v0.0.0-20241018205934-91eb6dc2a178 h1:C5J1nIMKCxJHmSms8oECpRKWGJ07YHyaP+sA+p9zJ7s=
+github.com/devhaozi/huaweicloud-sdk-go-v3 v0.0.0-20241018205934-91eb6dc2a178/go.mod h1:CrQMiHvWinjM271WoQml9iBNs5IhX/PmcNPiEdxk62U=
 github.com/golang/snappy v0.0.1/go.mod h1:/XxbfmMg8lxefKM7IXC3fBNl/7bRcc72aCRzEWrmP2Q=
 github.com/google/go-cmp v0.5.2 h1:X2ev0eStA3AbceY54o37/0PQ/UWqKEiiO2dKL5OPaFM=
 github.com/google/go-cmp v0.5.2/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=

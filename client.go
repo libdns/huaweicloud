@@ -6,10 +6,10 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/huaweicloud/huaweicloud-sdk-go-v3/core/auth/basic"
-	dns "github.com/huaweicloud/huaweicloud-sdk-go-v3/services/dns/v2"
-	"github.com/huaweicloud/huaweicloud-sdk-go-v3/services/dns/v2/model"
-	regions "github.com/huaweicloud/huaweicloud-sdk-go-v3/services/dns/v2/region"
+	"github.com/devhaozi/huaweicloud-sdk-go-v3/core/auth/basic"
+	dns "github.com/devhaozi/huaweicloud-sdk-go-v3/services/dns/v2"
+	"github.com/devhaozi/huaweicloud-sdk-go-v3/services/dns/v2/model"
+	regions "github.com/devhaozi/huaweicloud-sdk-go-v3/services/dns/v2/region"
 )
 
 func (p *Provider) getClient() (*dns.DnsClient, error) {

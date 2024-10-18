@@ -5,7 +5,7 @@ import (
 	"slices"
 	"time"
 
-	"github.com/huaweicloud/huaweicloud-sdk-go-v3/services/dns/v2/model"
+	"github.com/devhaozi/huaweicloud-sdk-go-v3/services/dns/v2/model"
 	"github.com/libdns/libdns"
 )
 
