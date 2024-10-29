@@ -1,4 +1,4 @@
-module github.com/libdns/huaweicloud
+module github.com/jicjoy/huaweicloud
 
 go 1.23
 

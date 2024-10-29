@@ -66,6 +66,7 @@ func (p *Provider) AppendRecords(ctx context.Context, zone string, records []lib
 		return nil, err
 	}
 
+	
 	for i, record := range records {
 		ttl := int32(record.TTL.Seconds())
 		request := &model.CreateRecordSetRequest{
@@ -74,7 +75,7 @@ func (p *Provider) AppendRecords(ctx context.Context, zone string, records []lib
 				Name:    libdns.AbsoluteName(record.Name, zone),
 				Type:    record.Type,
 				Ttl:     &ttl,
-				Records: []string{record.Value},
+				Records:  SolveRecordValue(record.Type,record.Value),
 			},
 		}
 		response, err := client.CreateRecordSet(request)
@@ -117,7 +118,7 @@ func (p *Provider) SetRecords(ctx context.Context, zone string, records []libdns
 		} else {
 			name := libdns.AbsoluteName(record.Name, zone)
 			ttl := int32(record.TTL.Seconds())
-			value := []string{record.Value}
+			value := SolveRecordValue(record.Type,record.Value)
 			request := &model.UpdateRecordSetRequest{
 				ZoneId:      zoneId,
 				RecordsetId: record.ID,

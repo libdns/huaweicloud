@@ -3,8 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-
-	"github.com/libdns/huaweicloud"
+    "time"
+	"github.com/jicjoy/huaweicloud"
+	"github.com/libdns/libdns"
 )
 
 func main() {
@@ -13,7 +14,14 @@ func main() {
 		SecretAccessKey: "YOUR_Secret_Key",
 	}
 
-	ret, err := p.GetRecords(context.TODO(), "your-domain")
+	ret, err := p.SetRecords(context.TODO(), "iitmall.com",[]libdns.Record{
+		 {
+			Type: "TXT",
+			Name: "es",
+			Value: "ssssfsdfsdf",
+			TTL: time.Duration(10)* time.Second,
+		 },
+	})
 
 	fmt.Println("Result:", ret)
 	fmt.Println("Error:", err)
