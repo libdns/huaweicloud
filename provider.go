@@ -64,10 +64,12 @@ func (p *Provider) AppendRecords(ctx context.Context, zone string, records []lib
 	if err != nil {
 		return nil, err
 	}
-	//ttl
-	parseTTL(&record)
+	
 	
 	for i, record := range records {
+		//ttl
+	    parseTTL(&record)
+		
 		ttl := int32(record.TTL.Seconds())
 		request := &model.CreateRecordSetRequest{
 			ZoneId: zoneId,
