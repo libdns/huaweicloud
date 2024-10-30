@@ -64,7 +64,8 @@ func (p *Provider) AppendRecords(ctx context.Context, zone string, records []lib
 	if err != nil {
 		return nil, err
 	}
-
+	//ttl
+	parseTTL(&record)
 	
 	for i, record := range records {
 		ttl := int32(record.TTL.Seconds())
@@ -104,7 +105,7 @@ func (p *Provider) SetRecords(ctx context.Context, zone string, records []libdns
 		 //parse ttl
 		 //parseTTL(&record)
 	     record.TTL = time.Duration(300)* time.Second
-		 
+
 		// If the record id is empty try to get it by name and type
 		if record.ID == "" {
 			id, err := p.getRecordIdByNameAndType(ctx, zone, record.Name, record.Type)
