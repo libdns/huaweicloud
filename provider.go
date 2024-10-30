@@ -4,7 +4,6 @@ import (
 	"context"
 	"slices"
 	"time"
-
 	"github.com/devhaozi/huaweicloud-sdk-go-v3/services/dns/v2/model"
 	"github.com/libdns/libdns"
 )
@@ -101,6 +100,10 @@ func (p *Provider) SetRecords(ctx context.Context, zone string, records []libdns
 	}
 
 	for i, record := range records {
+		 
+		 //parse ttl
+		 parseTTL(&record)
+	 
 		// If the record id is empty try to get it by name and type
 		if record.ID == "" {
 			id, err := p.getRecordIdByNameAndType(ctx, zone, record.Name, record.Type)
