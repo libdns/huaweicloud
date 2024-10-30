@@ -102,8 +102,9 @@ func (p *Provider) SetRecords(ctx context.Context, zone string, records []libdns
 	for i, record := range records {
 		 
 		 //parse ttl
-		 parseTTL(&record)
-	 
+		 //parseTTL(&record)
+	     record.TTL = time.Duration(300)* time.Second
+		 
 		// If the record id is empty try to get it by name and type
 		if record.ID == "" {
 			id, err := p.getRecordIdByNameAndType(ctx, zone, record.Name, record.Type)
