@@ -18,6 +18,21 @@ func DnsClientBuilder() *httpclient.HcHttpClientBuilder {
 	return builder
 }
 
+// ListPublicZones 查询公网Zone列表
+//
+// 查询公网Zone列表
+//
+// Please refer to HUAWEI cloud API Explorer for details.
+func (c *DnsClient) ListPublicZones(request *model.ListPublicZonesRequest) (*model.ListPublicZonesResponse, error) {
+	requestDef := GenReqDefForListPublicZones()
+
+	if resp, err := c.HcClient.Sync(request, requestDef); err != nil {
+		return nil, err
+	} else {
+		return resp.(*model.ListPublicZonesResponse), nil
+	}
+}
+
 // ListRecordSetsByZone 查询单个Zone下Record Set列表
 //
 // 查询单个Zone下Record Set列表
