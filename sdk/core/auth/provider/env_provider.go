@@ -20,12 +20,13 @@
 package provider
 
 import (
+	"os"
+	"strings"
+
 	"github.com/libdns/huaweicloud/sdk/core/auth"
 	"github.com/libdns/huaweicloud/sdk/core/auth/basic"
 	"github.com/libdns/huaweicloud/sdk/core/auth/global"
 	"github.com/libdns/huaweicloud/sdk/core/sdkerr"
-	"os"
-	"strings"
 )
 
 const (
@@ -70,14 +71,14 @@ func (p *EnvCredentialProvider) GetCredentials() (auth.ICredential, error) {
 		if err != nil {
 			return nil, err
 		}
-		return builder.Build(), nil
+		return builder.SafeBuild()
 	} else if strings.HasPrefix(p.credentialType, globalCredentialType) {
 		builder := global.NewCredentialsBuilder().WithDomainId(os.Getenv(domainIdEnvName))
 		err := fillCommonAttrs(builder, getCommonAttrsFromEnv())
 		if err != nil {
 			return nil, err
 		}
-		return builder.Build(), nil
+		return builder.SafeBuild()
 	}
 
 	return nil, sdkerr.NewCredentialsTypeError("unsupported credential type: " + p.credentialType)

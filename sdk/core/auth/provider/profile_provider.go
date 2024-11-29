@@ -21,8 +21,9 @@ package provider
 
 import (
 	"errors"
-	"github.com/libdns/huaweicloud/sdk/core/auth"
 	"strings"
+
+	"github.com/libdns/huaweicloud/sdk/core/auth"
 )
 
 const (

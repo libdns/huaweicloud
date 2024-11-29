@@ -20,11 +20,12 @@
 package request
 
 import (
+	"reflect"
+	"strings"
+
 	"github.com/libdns/huaweicloud/sdk/core/auth/signer/algorithm"
 	"github.com/libdns/huaweicloud/sdk/core/def"
 	"github.com/libdns/huaweicloud/sdk/core/progress"
-	"reflect"
-	"strings"
 )
 
 type HttpRequestBuilder struct {

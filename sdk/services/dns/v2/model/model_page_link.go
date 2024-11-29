@@ -1,9 +1,9 @@
 package model
 
 import (
-	"github.com/libdns/huaweicloud/sdk/core/utils"
-
 	"strings"
+
+	"github.com/libdns/huaweicloud/sdk/core/utils"
 )
 
 // PageLink 指向当前资源或者其他资源的链接。当查询需要分页时，需要包含一个next链接指向下一页。

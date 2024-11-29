@@ -21,6 +21,7 @@ package signer
 
 import (
 	"errors"
+
 	"github.com/libdns/huaweicloud/sdk/core/auth/signer/algorithm"
 	"github.com/libdns/huaweicloud/sdk/core/request"
 )

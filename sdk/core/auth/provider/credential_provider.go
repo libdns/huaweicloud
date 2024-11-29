@@ -21,9 +21,10 @@ package provider
 
 import (
 	"fmt"
+	"reflect"
+
 	"github.com/libdns/huaweicloud/sdk/core/auth"
 	"github.com/libdns/huaweicloud/sdk/core/sdkerr"
-	"reflect"
 )
 
 const (

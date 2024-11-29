@@ -21,6 +21,10 @@ package global
 
 import (
 	"fmt"
+	"io/ioutil"
+	"os"
+	"time"
+
 	"github.com/libdns/huaweicloud/sdk/core/auth"
 	"github.com/libdns/huaweicloud/sdk/core/auth/cache"
 	"github.com/libdns/huaweicloud/sdk/core/auth/internal"
@@ -28,9 +32,6 @@ import (
 	"github.com/libdns/huaweicloud/sdk/core/impl"
 	"github.com/libdns/huaweicloud/sdk/core/request"
 	"github.com/libdns/huaweicloud/sdk/core/sdkerr"
-	"io/ioutil"
-	"os"
-	"time"
 )
 
 const (
@@ -309,15 +310,6 @@ func (builder *CredentialsBuilder) WithIdpId(idpId string) *CredentialsBuilder {
 func (builder *CredentialsBuilder) WithIdTokenFile(idTokenFile string) *CredentialsBuilder {
 	builder.Credentials.IdTokenFile = idTokenFile
 	return builder
-}
-
-// Deprecated: This function may panic under certain circumstances. Use SafeBuild instead.
-func (builder *CredentialsBuilder) Build() *Credentials {
-	credentials, err := builder.SafeBuild()
-	if err != nil {
-		panic(err)
-	}
-	return credentials
 }
 
 func (builder *CredentialsBuilder) SafeBuild() (*Credentials, error) {

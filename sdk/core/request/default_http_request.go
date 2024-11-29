@@ -25,9 +25,6 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
-	"github.com/libdns/huaweicloud/sdk/core/auth/signer/algorithm"
-	"github.com/libdns/huaweicloud/sdk/core/converter"
-	"github.com/libdns/huaweicloud/sdk/core/progress"
 	"io"
 	"mime/multipart"
 	"net/http"
@@ -37,7 +34,10 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/libdns/huaweicloud/sdk/core/auth/signer/algorithm"
+	"github.com/libdns/huaweicloud/sdk/core/converter"
 	"github.com/libdns/huaweicloud/sdk/core/def"
+	"github.com/libdns/huaweicloud/sdk/core/progress"
 )
 
 type DefaultHttpRequest struct {

@@ -9,12 +9,13 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
-	"github.com/libdns/huaweicloud/sdk/core/request"
 	"net/url"
 	"reflect"
 	"sort"
 	"strings"
 	"time"
+
+	"github.com/libdns/huaweicloud/sdk/core/request"
 )
 
 const (

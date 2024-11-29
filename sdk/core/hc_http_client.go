@@ -24,6 +24,12 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
+	"net"
+	"net/url"
+	"reflect"
+	"strings"
+	"sync/atomic"
+
 	"github.com/libdns/huaweicloud/sdk/core/auth"
 	"github.com/libdns/huaweicloud/sdk/core/converter"
 	"github.com/libdns/huaweicloud/sdk/core/def"
@@ -34,11 +40,6 @@ import (
 	"github.com/libdns/huaweicloud/sdk/core/response"
 	"github.com/libdns/huaweicloud/sdk/core/sdkerr"
 	"github.com/libdns/huaweicloud/sdk/core/utils"
-	"net"
-	"net/url"
-	"reflect"
-	"strings"
-	"sync/atomic"
 )
 
 const (
@@ -83,11 +84,6 @@ func (hc *HcHttpClient) WithExtraHeaders(extraHeaders map[string]string) *HcHttp
 
 func (hc *HcHttpClient) GetCredential() auth.ICredential {
 	return hc.credential
-}
-
-// Deprecated: This function will be removed in the future version. Use WithExtraHeaders instead.
-func (hc *HcHttpClient) PreInvoke(headers map[string]string) *HcHttpClient {
-	return hc.WithExtraHeaders(headers)
 }
 
 func (hc *HcHttpClient) Sync(req interface{}, reqDef *def.HttpRequestDef) (interface{}, error) {

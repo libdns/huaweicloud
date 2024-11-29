@@ -20,9 +20,10 @@
 package provider
 
 import (
+	"strings"
+
 	"github.com/libdns/huaweicloud/sdk/core/auth"
 	"github.com/libdns/huaweicloud/sdk/core/sdkerr"
-	"strings"
 )
 
 type CredentialProviderChain struct {

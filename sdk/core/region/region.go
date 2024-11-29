@@ -31,11 +31,6 @@ func NewRegion(id string, endpoints ...string) *Region {
 	}
 }
 
-// Deprecated: As of 0.1.27, because of the support of the multi-endpoint feature, use WithEndpointsOverride instead
-func (r *Region) WithEndpointOverride(endpoint string) *Region {
-	return r.WithEndpointsOverride([]string{endpoint})
-}
-
 func (r *Region) WithEndpointsOverride(endpoints []string) *Region {
 	r.Endpoints = endpoints
 	return r

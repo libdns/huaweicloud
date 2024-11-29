@@ -67,11 +67,6 @@ func (b *BaseInvoker) ReplaceCredentialWhen(fun func(auth.ICredential) auth.ICre
 	return b
 }
 
-// Deprecated: This function will be removed in the future version, use AddHeaders instead.
-func (b *BaseInvoker) AddHeader(headers map[string]string) *BaseInvoker {
-	return b.AddHeaders(headers)
-}
-
 func (b *BaseInvoker) AddHeaders(headers map[string]string) *BaseInvoker {
 	if headers != nil {
 		for k, v := range headers {

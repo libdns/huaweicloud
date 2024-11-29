@@ -1,9 +1,9 @@
 package model
 
 import (
-	"github.com/libdns/huaweicloud/sdk/core/utils"
-
 	"strings"
+
+	"github.com/libdns/huaweicloud/sdk/core/utils"
 )
 
 // Metadata 返回满足过滤条件的资源总数。

@@ -20,11 +20,12 @@
 package provider
 
 import (
+	"strings"
+
 	"github.com/libdns/huaweicloud/sdk/core/auth"
 	"github.com/libdns/huaweicloud/sdk/core/auth/basic"
 	"github.com/libdns/huaweicloud/sdk/core/auth/global"
 	"github.com/libdns/huaweicloud/sdk/core/sdkerr"
-	"strings"
 )
 
 type MetadataCredentialProvider struct {
@@ -54,16 +55,20 @@ func (p *MetadataCredentialProvider) GetCredentials() (auth.ICredential, error) 
 	}
 
 	if strings.HasPrefix(p.credentialType, basicCredentialType) {
-		credentials := basic.NewCredentialsBuilder().Build()
-		err := credentials.UpdateSecurityTokenFromMetadata()
+		credentials, err := basic.NewCredentialsBuilder().SafeBuild()
 		if err != nil {
+			return nil, err
+		}
+		if err = credentials.UpdateSecurityTokenFromMetadata(); err != nil {
 			return nil, err
 		}
 		return credentials, nil
 	} else if strings.HasPrefix(p.credentialType, globalCredentialType) {
-		credentials := global.NewCredentialsBuilder().Build()
-		err := credentials.UpdateSecurityTokenFromMetadata()
+		credentials, err := global.NewCredentialsBuilder().SafeBuild()
 		if err != nil {
+			return nil, err
+		}
+		if err = credentials.UpdateSecurityTokenFromMetadata(); err != nil {
 			return nil, err
 		}
 		return credentials, nil

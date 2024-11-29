@@ -22,11 +22,12 @@ package config
 import (
 	"context"
 	"fmt"
-	"github.com/libdns/huaweicloud/sdk/core/auth/signer/algorithm"
-	"github.com/libdns/huaweicloud/sdk/core/httphandler"
 	"net"
 	"net/http"
 	"time"
+
+	"github.com/libdns/huaweicloud/sdk/core/auth/signer/algorithm"
+	"github.com/libdns/huaweicloud/sdk/core/httphandler"
 )
 
 const (

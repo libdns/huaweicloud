@@ -20,11 +20,12 @@
 package internal
 
 import (
-	"github.com/libdns/huaweicloud/sdk/core/sdkerr"
-	"github.com/libdns/huaweicloud/sdk/core/utils"
 	"io/ioutil"
 	"net/http"
 	"time"
+
+	"github.com/libdns/huaweicloud/sdk/core/sdkerr"
+	"github.com/libdns/huaweicloud/sdk/core/utils"
 )
 
 type GetTemporaryCredentialFromMetadataResponse struct {

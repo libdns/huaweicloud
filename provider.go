@@ -5,8 +5,9 @@ import (
 	"slices"
 	"time"
 
-	"github.com/libdns/huaweicloud/sdk/services/dns/v2/model"
 	"github.com/libdns/libdns"
+
+	"github.com/libdns/huaweicloud/sdk/services/dns/v2/model"
 )
 
 // Provider facilitates DNS record manipulation with Huawei Cloud

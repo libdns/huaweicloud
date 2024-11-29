@@ -20,9 +20,10 @@
 package auth
 
 import (
-	"github.com/libdns/huaweicloud/sdk/core/request"
 	"regexp"
 	"strings"
+
+	"github.com/libdns/huaweicloud/sdk/core/request"
 )
 
 const DefaultEndpointReg = "^[a-z][a-z0-9-]+(\\.[a-z]{2,}-[a-z]+-\\d{1,2})?\\.(my)?(huaweicloud|myhwclouds).(com|cn)"

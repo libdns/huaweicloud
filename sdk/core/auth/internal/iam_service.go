@@ -21,15 +21,16 @@ package internal
 
 import (
 	"errors"
+	"os"
+	"reflect"
+	"strings"
+
 	"github.com/libdns/huaweicloud/sdk/core/config"
 	"github.com/libdns/huaweicloud/sdk/core/impl"
 	"github.com/libdns/huaweicloud/sdk/core/request"
 	"github.com/libdns/huaweicloud/sdk/core/response"
 	"github.com/libdns/huaweicloud/sdk/core/sdkerr"
 	"github.com/libdns/huaweicloud/sdk/core/utils"
-	"os"
-	"reflect"
-	"strings"
 )
 
 const (

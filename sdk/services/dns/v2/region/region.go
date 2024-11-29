@@ -2,9 +2,10 @@ package region
 
 import (
 	"fmt"
-	"github.com/libdns/huaweicloud/sdk/core/region"
 	"sort"
 	"strings"
+
+	"github.com/libdns/huaweicloud/sdk/core/region"
 )
 
 var (
@@ -88,28 +89,18 @@ func getRegionIds() []string {
 }
 
 func SafeValueOf(regionId string) (region *region.Region, err error) {
-	defer func() {
-		if r := recover(); r != nil {
-			err = fmt.Errorf("%v", r)
-		}
-	}()
-	region = ValueOf(regionId)
-	return region, err
-}
-
-// Deprecated: This function may panic under certain circumstances. Use SafeValueOf instead.
-func ValueOf(regionId string) *region.Region {
 	if regionId == "" {
-		panic("unexpected empty parameter: regionId")
+		return nil, fmt.Errorf("unexpected empty parameter: regionId")
 	}
 
 	reg := provider.GetRegion(regionId)
 	if reg != nil {
-		return reg
+		return reg, nil
 	}
 
 	if _, ok := staticFields[regionId]; ok {
-		return staticFields[regionId]
+		return staticFields[regionId], nil
 	}
-	panic(fmt.Sprintf("region id '%s' is not in the following supported regions of service 'DNS': [%s]", regionId, strings.Join(getRegionIds(), ", ")))
+
+	return nil, fmt.Errorf("region id '%s' is not in the following supported regions of service 'DNS': [%s]", regionId, strings.Join(getRegionIds(), ", "))
 }

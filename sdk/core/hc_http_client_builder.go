@@ -21,14 +21,15 @@ package core
 
 import (
 	"fmt"
+	"reflect"
+	"strings"
+
 	"github.com/libdns/huaweicloud/sdk/core/auth"
 	"github.com/libdns/huaweicloud/sdk/core/auth/provider"
 	"github.com/libdns/huaweicloud/sdk/core/config"
 	"github.com/libdns/huaweicloud/sdk/core/impl"
 	"github.com/libdns/huaweicloud/sdk/core/region"
 	"github.com/libdns/huaweicloud/sdk/core/sdkerr"
-	"reflect"
-	"strings"
 )
 
 type HcHttpClientBuilder struct {
@@ -59,11 +60,6 @@ func (builder *HcHttpClientBuilder) WithDerivedAuthServiceName(derivedAuthServic
 	return builder
 }
 
-// Deprecated: As of 0.1.27, because of the support of the multi-endpoint feature, use WithEndpoints instead
-func (builder *HcHttpClientBuilder) WithEndpoint(endpoint string) *HcHttpClientBuilder {
-	return builder.WithEndpoints([]string{endpoint})
-}
-
 func (builder *HcHttpClientBuilder) WithEndpoints(endpoints []string) *HcHttpClientBuilder {
 	builder.endpoints = endpoints
 	return builder
@@ -89,8 +85,7 @@ func (builder *HcHttpClientBuilder) WithErrorHandler(errorHandler sdkerr.ErrorHa
 	return builder
 }
 
-// Deprecated: This function may panic under certain circumstances. Use SafeBuild instead.
-func (builder *HcHttpClientBuilder) Build() *HcHttpClient {
+func (builder *HcHttpClientBuilder) SafeBuild() (client *HcHttpClient, err error) {
 	if builder.httpConfig == nil {
 		builder.httpConfig = config.DefaultHttpConfig()
 	}
@@ -101,7 +96,7 @@ func (builder *HcHttpClientBuilder) Build() *HcHttpClient {
 		p := provider.DefaultCredentialProviderChain(builder.CredentialsType[0])
 		credentials, err := p.GetCredentials()
 		if err != nil {
-			panic(err)
+			return nil, err
 		}
 		builder.credentials = credentials
 	}
@@ -119,7 +114,7 @@ func (builder *HcHttpClientBuilder) Build() *HcHttpClient {
 		}
 	}
 	if !match {
-		panic(fmt.Errorf("need credential type is %s, actually is %s", builder.CredentialsType, givenCredentialsType))
+		return nil, fmt.Errorf("need credential type is %s, actually is %s", builder.CredentialsType, givenCredentialsType)
 	}
 
 	if builder.region != nil {
@@ -141,15 +136,5 @@ func (builder *HcHttpClientBuilder) Build() *HcHttpClient {
 		WithEndpoints(builder.endpoints).
 		WithCredential(builder.credentials).
 		WithErrorHandler(builder.errorHandler)
-	return hcHttpClient
-}
-
-func (builder *HcHttpClientBuilder) SafeBuild() (client *HcHttpClient, err error) {
-	defer func() {
-		if r := recover(); r != nil {
-			err = fmt.Errorf("%v", r)
-		}
-	}()
-	client = builder.Build()
-	return
+	return hcHttpClient, nil
 }

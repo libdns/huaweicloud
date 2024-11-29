@@ -24,11 +24,13 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
-	"github.com/libdns/huaweicloud/sdk/core/request"
-	"golang.org/x/crypto/hkdf"
 	"io"
 	"strings"
 	"time"
+
+	"golang.org/x/crypto/hkdf"
+
+	"github.com/libdns/huaweicloud/sdk/core/request"
 )
 
 const (

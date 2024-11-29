@@ -22,18 +22,19 @@ package impl
 import (
 	"bytes"
 	"crypto/tls"
-	"github.com/libdns/huaweicloud/sdk/core/config"
-	"github.com/libdns/huaweicloud/sdk/core/exchange"
-	"github.com/libdns/huaweicloud/sdk/core/httphandler"
-	"github.com/libdns/huaweicloud/sdk/core/progress"
-	"github.com/libdns/huaweicloud/sdk/core/request"
-	"github.com/libdns/huaweicloud/sdk/core/response"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/libdns/huaweicloud/sdk/core/config"
+	"github.com/libdns/huaweicloud/sdk/core/exchange"
+	"github.com/libdns/huaweicloud/sdk/core/httphandler"
+	"github.com/libdns/huaweicloud/sdk/core/progress"
+	"github.com/libdns/huaweicloud/sdk/core/request"
+	"github.com/libdns/huaweicloud/sdk/core/response"
 )
 
 type DefaultHttpClient struct {

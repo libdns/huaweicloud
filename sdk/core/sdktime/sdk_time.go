@@ -69,11 +69,11 @@ func (t *SdkTime) UnmarshalJSON(data []byte) error {
 	return err
 }
 
-func (t SdkTime) MarshalJSON() ([]byte, error) {
+func (t *SdkTime) MarshalJSON() ([]byte, error) {
 	rs := []byte(fmt.Sprintf(`"%s"`, t.String()))
 	return rs, nil
 }
 
-func (t SdkTime) String() string {
-	return time.Time(t).Format(`2006-01-02T15:04:05Z`)
+func (t *SdkTime) String() string {
+	return time.Time(*t).Format(`2006-01-02T15:04:05Z`)
 }

@@ -25,8 +25,9 @@ import (
 	"crypto/elliptic"
 	"encoding/hex"
 	"errors"
-	"github.com/libdns/huaweicloud/sdk/core/request"
 	"math/big"
+
+	"github.com/libdns/huaweicloud/sdk/core/request"
 )
 
 const (

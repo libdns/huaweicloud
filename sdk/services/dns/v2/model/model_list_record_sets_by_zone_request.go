@@ -1,9 +1,9 @@
 package model
 
 import (
-	"github.com/libdns/huaweicloud/sdk/core/utils"
-
 	"strings"
+
+	"github.com/libdns/huaweicloud/sdk/core/utils"
 )
 
 // ListRecordSetsByZoneRequest Request Object

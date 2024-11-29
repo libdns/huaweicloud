@@ -21,7 +21,7 @@ package sdkerr
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 
 	"github.com/libdns/huaweicloud/sdk/core/utils"
@@ -110,7 +110,7 @@ func NewServiceResponseError(resp *http.Response) *ServiceResponseError {
 	sr := &ServiceResponseError{}
 
 	defer resp.Body.Close()
-	data, err := ioutil.ReadAll(resp.Body)
+	data, err := io.ReadAll(resp.Body)
 	if err != nil {
 		sr.ErrorMessage = err.Error()
 		return sr

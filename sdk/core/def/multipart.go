@@ -22,13 +22,14 @@ package def
 import (
 	"errors"
 	"fmt"
-	"github.com/libdns/huaweicloud/sdk/core/converter"
 	"io"
 	"mime/multipart"
 	"net/textproto"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/libdns/huaweicloud/sdk/core/converter"
 )
 
 var quoteEscape = strings.NewReplacer("\\", "\\\\", `"`, "\\\"")
