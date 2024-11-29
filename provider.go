@@ -5,7 +5,7 @@ import (
 	"slices"
 	"time"
 
-	"github.com/devhaozi/huaweicloud-sdk-go-v3/services/dns/v2/model"
+	"github.com/libdns/huaweicloud/sdk/services/dns/v2/model"
 	"github.com/libdns/libdns"
 )
 
@@ -67,6 +67,10 @@ func (p *Provider) AppendRecords(ctx context.Context, zone string, records []lib
 	}
 
 	for i, record := range records {
+		// Fill the TTL with the default value if it is empty
+		if record.TTL == 0 {
+			record.TTL = 10 * time.Minute
+		}
 		ttl := int32(record.TTL.Seconds())
 		request := &model.CreateRecordSetRequest{
 			ZoneId: zoneId,
@@ -74,7 +78,7 @@ func (p *Provider) AppendRecords(ctx context.Context, zone string, records []lib
 				Name:    libdns.AbsoluteName(record.Name, zone),
 				Type:    record.Type,
 				Ttl:     &ttl,
-				Records: []string{record.Value},
+				Records: prepareRecordValue(record.Type, record.Value),
 			},
 		}
 		response, err := client.CreateRecordSet(request)
@@ -107,6 +111,10 @@ func (p *Provider) SetRecords(ctx context.Context, zone string, records []libdns
 				record.ID = id
 			}
 		}
+		// Fill the TTL with the default value if it is empty
+		if record.TTL == 0 {
+			record.TTL = 10 * time.Minute
+		}
 		// If the record id is still empty, it means it is a new record
 		if record.ID == "" {
 			newRecord, err := p.AppendRecords(ctx, zone, []libdns.Record{record})
@@ -117,7 +125,7 @@ func (p *Provider) SetRecords(ctx context.Context, zone string, records []libdns
 		} else {
 			name := libdns.AbsoluteName(record.Name, zone)
 			ttl := int32(record.TTL.Seconds())
-			value := []string{record.Value}
+			value := prepareRecordValue(record.Type, record.Value)
 			request := &model.UpdateRecordSetRequest{
 				ZoneId:      zoneId,
 				RecordsetId: record.ID,
