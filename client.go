@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"strings"
-	"sync"
 
 	"github.com/libdns/huaweicloud/sdk/core/auth/basic"
 	dns "github.com/libdns/huaweicloud/sdk/services/dns/v2"
@@ -13,35 +12,31 @@ import (
 )
 
 func (p *Provider) getClient() (*dns.DnsClient, error) {
-	client := sync.OnceValues(func() (*dns.DnsClient, error) {
-		auth, err := basic.NewCredentialsBuilder().
-			WithAk(p.AccessKeyId).
-			WithSk(p.SecretAccessKey).
-			SafeBuild()
-		if err != nil {
-			return nil, err
-		}
+	auth, err := basic.NewCredentialsBuilder().
+		WithAk(p.AccessKeyId).
+		WithSk(p.SecretAccessKey).
+		SafeBuild()
+	if err != nil {
+		return nil, err
+	}
 
-		if p.RegionId == "" {
-			p.RegionId = "cn-south-1"
-		}
-		region, err := regions.SafeValueOf(p.RegionId)
-		if err != nil {
-			return nil, err
-		}
+	if p.RegionId == "" {
+		p.RegionId = "cn-south-1"
+	}
+	region, err := regions.SafeValueOf(p.RegionId)
+	if err != nil {
+		return nil, err
+	}
 
-		builder, err := dns.DnsClientBuilder().
-			WithRegion(region).
-			WithCredential(auth).
-			SafeBuild()
-		if err != nil {
-			return nil, err
-		}
+	builder, err := dns.DnsClientBuilder().
+		WithRegion(region).
+		WithCredential(auth).
+		SafeBuild()
+	if err != nil {
+		return nil, err
+	}
 
-		return dns.NewDnsClient(builder), nil
-	})
-
-	return client()
+	return dns.NewDnsClient(builder), nil
 }
 
 func (p *Provider) getZoneIdByName(name string) (string, error) {
