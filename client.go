@@ -1,6 +1,7 @@
 package huaweicloud
 
 import (
+	"context"
 	"fmt"
 	"strings"
 
@@ -65,4 +66,22 @@ func (p *Provider) getZoneIdByName(name string) (string, error) {
 	}
 
 	return *zones[0].Id, nil
+}
+
+func (p *Provider) getRecordId(ctx context.Context, zone, recName, recType string, recVal ...string) (string, error) {
+	records, err := p.GetRecords(ctx, zone)
+	if err != nil {
+		return "", err
+	}
+
+	for _, record := range records {
+		if recName == record.Name && recType == record.Type {
+			if len(recVal) > 0 && recVal[0] != "" && record.Value != recVal[0] {
+				continue
+			}
+			return record.ID, nil
+		}
+	}
+
+	return "", fmt.Errorf("record %q not found", recName)
 }
