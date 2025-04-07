@@ -6,4 +6,4 @@ toolchain go1.24.1
 
 require github.com/libdns/libdns v0.2.3
 
-require golang.org/x/crypto v0.36.0
+require golang.org/x/crypto v0.37.0
