@@ -56,6 +56,16 @@ func hwRecord(zone string, r libdns.Record) (RecordSet, error) {
 	if rr.TTL <= 0 {
 		rr.TTL = 1 * time.Second // 华为云支持最小 1 秒
 	}
+	// Fix TXT records missing starting quotation mark
+	// https://github.com/libdns/huaweicloud/issues/1
+	if rr.Type == "TXT" {
+		if rr.Data[0] != '"' {
+			rr.Data = `"` + rr.Data
+		}
+		if rr.Data[len(rr.Data)-1] != '"' {
+			rr.Data = rr.Data + `"`
+		}
+	}
 	return RecordSet{
 		Name:    libdns.AbsoluteName(rr.Name, zone),
 		Type:    rr.Type,
