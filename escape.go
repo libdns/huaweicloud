@@ -1,3 +1,8 @@
+// based on https://github.com/golang/go/blob/master/src/net/url/url.go
+// Copyright 2009 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 package huaweicloud
 
 func shouldEscape(c byte) bool {

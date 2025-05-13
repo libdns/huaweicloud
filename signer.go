@@ -1,3 +1,7 @@
+// HWS API Gateway Signature
+// based on https://github.com/datastream/aws/blob/master/signv4.go
+// Copyright (c) 2014, Xianjie
+
 package huaweicloud
 
 import (
